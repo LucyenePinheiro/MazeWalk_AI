@@ -5,7 +5,7 @@ from collections import deque  # Para criar filas otimizadas
 
 # Configuração da tela principal
 wn = turtle.Screen()
-wn.bgcolor("white")
+wn.bgcolor("purple")
 wn.title("MazeWalk_AI com BFS")
 wn.setup(1200, 600)
 
@@ -37,29 +37,41 @@ class Yellow(turtle.Turtle):
         self.speed(0)
 
 # Classe para o marcador do caminho solucionado
-class Brown(turtle.Turtle):
+class White(turtle.Turtle):
     def __init__(self):
         super().__init__()
         self.shape("square")
-        self.color("brown")
+        self.color("White")
         self.penup()
         self.speed(0)
 
 # Labirinto
 grid = [
-    "++++++++++++++++++++++++++",
-    "+               +        +",
-    "+  ++++++++++  +++++++++++",
-    "+s          +        ++  +",
-    "+  +++++++  +++  ++++++++ ",
-    "+  +     +  +        +  + ",
-    "+  +  +  +  +  +  ++++   +",
-    "+  +  +  +  +  +  +       ",
-    "+  +  ++++  +  +++++++++  ",
-    "+  +     +  +          +  ",
-    "+  ++++  +  +++++++ ++++++",
-    "+     +  +     +          ",
-    "++++++++++++++e+++++++++++",
+    "+++++++++++++++++++++++++++++++++++++++++++++++++++",
+    "+               +                                 +",
+    "+  ++++++++++  +++++++++++++  +++++++  ++++++++++++",
+    "+s          +                 +               ++  +",
+    "+  +++++++  +++++++++++++  +++++++++++++++++++++  +",
+    "+  +     +  +           +  +                 +++  +",
+    "+  +  +  +  +  +  ++++  +  +  +++++++++++++  +++  +",
+    "+  +  +  +  +  +  +        +  +  +        +       +",
+    "+  +  ++++  +  ++++++++++  +  +  ++++  +  +  ++   +",
+    "+  +     +  +          +   +           +  +  ++  ++",
+    "+  ++++  +  +++++++ ++++++++  +++++++++++++  ++  ++",
+    "+     +  +     +              +              ++   +",
+    "++++  +  ++++++++++ +++++++++++  ++++++++++  +++  +",
+    "+  +  +                    +     +     +  +  +++  +",
+    "+  +  ++++  +++++++++++++  +  ++++  +  +  +  ++   +",
+    "+  +  +     +     +     +  +  +     +     +  ++  ++",
+    "+  +  +  +++++++  ++++  +  +  +  ++++++++++  ++  ++",
+    "+                       +  +  +              ++  ++",
+    "+ ++++++             +  +  +  +  +++        +++  ++",
+    "+ ++++++ ++++++ +++++++++    ++ ++   ++++++++++  ++",
+    "+ +    +    +++ +     +++++++++ ++  +++++++    + ++",
+    "+ ++++ ++++ +++ + +++ +++    ++    ++    ++ ++ + ++",
+    "+ ++++    +     + +++ +++ ++ ++++++++ ++ ++ ++   ++",
+    "+      ++ +++++           ++          ++    +++++++",
+    "+++++++++++++++++++e+++++++++++++++++++++++++++++++",
 ]
 
 # Função para configurar o labirinto
@@ -97,6 +109,11 @@ def search(x, y):
         time.sleep(0.05)  # Controla o tempo de execução
         x, y = frontier.popleft()  # Remove a célula da fronteira
 
+        #Verifica se encontrou a saída
+        if (x,y)==(end_x, end_y):
+            print("saída encontrada.")
+            return
+
         # Verifica os vizinhos da célula atual e adiciona à fronteira
         for dx, dy in [(-24, 0), (24, 0), (0, -24), (0, 24)]:
             neighbor = (x + dx, y + dy)
@@ -110,17 +127,17 @@ def search(x, y):
 
 # Traça a rota de volta para o início
 def backRoute(x, y):
-    brown.goto(x, y)
-    brown.stamp()
+    white.goto(x, y)
+    white.stamp()
     while (x, y) != (start_x, start_y):
         x, y = solution[(x, y)]
-        brown.goto(x, y)
-        brown.stamp()
+        white.goto(x, y)
+        white.stamp()
 
 # Instancia os objetos
 maze = Maze()
 black = Black()
-brown = Brown()
+white = White()
 yellow = Yellow()
 
 # Inicializa as listas e estruturas de controle
