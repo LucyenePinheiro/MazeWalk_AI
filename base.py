@@ -6,7 +6,7 @@ from collections import deque  # Para criar filas otimizadas
 
 # Configuração da tela principal
 wn = turtle.Screen()
-wn.bgcolor("purple")
+wn.bgcolor("LightSkyBlue")
 wn.title("MazeWalk_AI com BFS")
 wn.setup(1200, 600)
 
@@ -23,10 +23,14 @@ class Maze(turtle.Turtle):
 class Black(turtle.Turtle):
     def __init__(self):
         super().__init__()
-        self.shape("square")
+        self.hideturtle()
         self.color("black")
         self.penup()
         self.speed(0)
+
+    def stamp(self):
+        self.goto(self.xcor(), self.ycor() - 24/2)
+        self.write("🐟", align="center", font=("Arial", int(24 / 1.5), "normal"))
 
 # Classe para o ponto inicial
 class Yellow(turtle.Turtle):
@@ -75,6 +79,7 @@ grid = [
     "+++++++++++++++++++e+++++++++++++++++++++++++++++++",
 ]
 
+
 # Função para configurar o labirinto
 def setup_maze(grid):
     global start_x, start_y, end_x, end_y  # Variáveis para início e fim do labirinto
@@ -87,6 +92,7 @@ def setup_maze(grid):
             if character == "+":  # Se o caractere é "+", desenha uma parede
                 maze.goto(screen_x, screen_y)
                 maze.stamp()
+                maze.shapesize(24/20)
                 walls.append((screen_x, screen_y))
 
             if character == " " or character == "e":  # Caminho ou saída
@@ -94,12 +100,14 @@ def setup_maze(grid):
 
             if character == "e":  # Marca a posição de saída
                 black.goto(screen_x, screen_y)
+                black.shapesize(24/20)
                 end_x, end_y = screen_x, screen_y
                 black.stamp()
 
             if character == "s":  # Marca a posição de início
                 start_x, start_y = screen_x, screen_y
                 yellow.goto(screen_x, screen_y)
+                yellow.shapesize(24/20)
 
 # Algoritmo de busca em largura (BFS)
 def search(x, y):
