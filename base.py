@@ -1,6 +1,7 @@
 import turtle
 import time
 import sys
+import random
 from collections import deque  # Para criar filas otimizadas
 
 # Configuração da tela principal
@@ -116,10 +117,18 @@ def search(x, y):
 
         # Marca a célula atual como visitada
         visited.add((x, y))  
-        
+
+        # Cria uma lista de vizinhos e embaralha para escolha aleatória
+        neighbors = [
+            (x - 24, y),
+            (x + 24, y),
+            (x, y - 24),
+            (x, y + 24)
+        ]
+        random.shuffle(neighbors)  # Embaralha os vizinhos
+
         # Percorre os vizinhos da célula atual
-        for dx, dy in [(-24, 0), (24, 0), (0, -24), (0, 24)]:
-            neighbor = (x + dx, y + dy)
+        for neighbor in neighbors:
             if neighbor in path and neighbor not in visited and neighbor not in frontier:
                 solution[neighbor] = (x, y)  # Registra o caminho
                 frontier.append(neighbor)  # Adiciona o vizinho na fronteira
