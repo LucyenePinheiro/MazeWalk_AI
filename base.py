@@ -6,7 +6,7 @@ from collections import deque  # Para criar filas otimizadas
 
 # Configuração da tela principal
 wn = turtle.Screen()
-wn.bgcolor("LightSkyBlue")
+wn.bgcolor("LightBlue")
 wn.title("MazeWalk_AI com BFS")
 wn.setup(1200, 600)
 
@@ -15,7 +15,7 @@ class Maze(turtle.Turtle):
     def __init__(self):
         super().__init__()
         self.shape("square")
-        self.color("red")
+        self.color("DarkGreen")
         self.penup()
         self.speed(0)
 
@@ -24,13 +24,14 @@ class Black(turtle.Turtle):
     def __init__(self):
         super().__init__()
         self.hideturtle()
-        self.color("black")
+        self.color("DarkOrange")
         self.penup()
         self.speed(0)
 
     def stamp(self):
-        self.goto(self.xcor(), self.ycor() - 24/2)
-        self.write("🐟", align="center", font=("Arial", int(24 / 1.5), "normal"))
+        self.goto(self.xcor(), self.ycor() - 24 / 2)
+        self.write("🦀", align="center", font=("Arial", int(24 / 1.5), "normal"))
+
 
 # Classe para o ponto inicial
 class Yellow(turtle.Turtle):
