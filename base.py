@@ -106,21 +106,23 @@ def search(x, y):
     solution[(x, y)] = (x, y)  # Marca a célula inicial na solução
 
     while frontier:  # Continua enquanto houver células na fronteira
-        time.sleep(0.05)  # Controla o tempo de execução
-        x, y = frontier.popleft()  # Remove a célula da fronteira
+        time.sleep(0.01)  # Controla o tempo de execução
+        x, y = frontier.pop()  # Remove a célula da fronteira
 
         #Verifica se encontrou a saída
         if (x,y)==(end_x, end_y):
             print("saída encontrada.")
             return
 
-        # Verifica os vizinhos da célula atual e adiciona à fronteira
+        # Marca a célula atual como visitada
+        visited.add((x, y))  
+        
+        # Percorre os vizinhos da célula atual
         for dx, dy in [(-24, 0), (24, 0), (0, -24), (0, 24)]:
             neighbor = (x + dx, y + dy)
-            if neighbor in path and neighbor not in visited:
-                solution[neighbor] = (x, y)
-                frontier.append(neighbor)
-                visited.add(neighbor)
+            if neighbor in path and neighbor not in visited and neighbor not in frontier:
+                solution[neighbor] = (x, y)  # Registra o caminho
+                frontier.append(neighbor)  # Adiciona o vizinho na fronteira
 
         black.goto(x, y)  # Marca a célula atual
         black.stamp()
