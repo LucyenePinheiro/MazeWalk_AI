@@ -8,7 +8,7 @@ from collections import deque  # Para criar filas otimizadas
 wn = turtle.Screen()
 wn.bgcolor("DarkBlue")
 wn.title("MazeWalk_AI com BFS")
-wn.setup(1200, 600)
+wn.setup(1300, 700)
 
 # Classe para criar labirinto
 class Maze(turtle.Turtle):
